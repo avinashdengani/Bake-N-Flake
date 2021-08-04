@@ -10002,3 +10002,73 @@ h3 {
     border-color: #dee2e6;
   }
 }
+::-moz-selection {
+  background: #78e4ff;
+}
+::selection {
+  background: #78e4ff;
+}
+
+body {
+  background-color: #FFF9F3;
+}
+
+.my-navbar {
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.my-navbar-brand {
+  font-family: "Fredoka One", cursive;
+  color: #57453a;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  text-decoration: none;
+}
+.my-navbar-brand:hover {
+  color: #664e40;
+  text-decoration: none;
+}
+
+.input {
+  width: 150%;
+  border-radius: 12px;
+}
+@media (max-width: 1200px) and (min-width: 800px) {
+  .input {
+    width: 230px;
+  }
+}
+@media (max-width: 800px) and (min-width: 400px) {
+  .input {
+    width: 260px;
+  }
+}
+
+.my-card {
+  box-shadow: 5px 15px 15px 10px rgba(0, 0, 0, 0.5);
+}
+
+.my-login-button {
+  background: #ffa461;
+  padding: 5px;
+  border: none;
+  color: #FFF;
+  width: 150%;
+}
+.my-login-button:hover {
+  background: #eea36e;
+  color: #FFF;
+}
+@media (max-width: 800px) and (min-width: 400px) {
+  .my-login-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 800px) and (min-width: 400px) {
+  .auth-desgin {
+    display: none;
+  }
+}

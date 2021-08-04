@@ -6,3 +6,64 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+::selection {
+    background: #78e4ff;
+}
+body {
+    background-color: #FFF9F3;
+}
+.my-navbar {
+    box-shadow: 5px 5px 5px 5px  rgba(0, 0, 0, 0.2);
+}
+.my-navbar-brand {
+    font-family: 'Fredoka One', cursive;
+    color: #57453a;
+    user-select: none;
+    text-decoration: none;
+
+    &:hover{
+        color: #664e40;
+        text-decoration: none;
+    }
+}
+.input {
+    width: 150%;
+    border-radius: 12px;
+
+    @media (max-width:1200px) and (min-width:800px) {
+        width:230px;
+    }
+
+    @media (max-width:800px) and (min-width:400px) {
+        width:260px;
+    }
+}
+.my-card {
+    box-shadow: 5px 15px 15px 10px  rgba(0, 0, 0, 0.5);
+}
+
+.my-login-button {
+    background: #ffa461;
+    padding: 5px;
+    border: none;
+    color: #FFF;
+    width: 150%;
+
+    &:hover {
+        background: #eea36e;
+        color: #FFF;
+    }
+
+    @media (max-width:800px) and (min-width:400px) {
+        width:100%;
+    }
+}
+
+
+.auth-desgin {
+    @media (max-width:800px) and (min-width:400px) {
+        display: none;
+    }
+}
+
