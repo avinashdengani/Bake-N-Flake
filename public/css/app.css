@@ -10072,3 +10072,20 @@ body {
     display: none;
   }
 }
+
+.my-register-button {
+  background: #b5dcf1;
+  padding: 5px;
+  border: none;
+  color: #603712;
+  width: 150%;
+}
+.my-register-button:hover {
+  background: #8dacbd;
+  color: #603712;
+}
+@media (max-width: 1200px) and (min-width: 400px) {
+  .my-register-button {
+    width: 100%;
+  }
+}
