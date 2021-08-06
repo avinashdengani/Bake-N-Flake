@@ -67,7 +67,7 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-
+        return view('categories.edit', compact(['category']));
     }
 
     /**
@@ -79,7 +79,15 @@ class CategoriesController extends Controller
      */
     public function update(UpdateCategoryrequest $request, Category $category)
     {
-
+        $dataToUpdate = $request->only(['name']);
+        if($request->hasFile('image')) {
+            $image = $request->image->store('images/categories');
+            $dataToUpdate['image'] = $image;
+            $category->deleteImage();
+        }
+        $category->update($dataToUpdate);
+        session()->flash('success', 'Category updated sucessfully!');
+        return redirect(route('categories.index'));
     }
 
     /**
