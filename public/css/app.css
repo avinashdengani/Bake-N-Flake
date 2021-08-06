@@ -10011,6 +10011,7 @@ h3 {
 
 body {
   background-color: #FFF9F3;
+  font-family: "Comic Neue", cursive;
 }
 
 .my-navbar {
@@ -10126,5 +10127,63 @@ body {
 @media (max-width: 800px) and (min-width: 400px) {
   .my-reset-password-button {
     width: 260px;
+  }
+}
+
+.my-category-card {
+  box-shadow: 4px 4px 10px 3px rgba(0, 0, 0, 0.2);
+}
+.my-category-card-img {
+  width: 100%;
+  height: 290px;
+}
+@media (max-width: 1200px) and (min-width: 992px) {
+  .my-category-card-img {
+    height: 200px;
+  }
+}
+.my-category-card-body {
+  width: 250px;
+  height: 475px;
+}
+.my-category-card-body-text {
+  display: none;
+  position: absolute;
+  top: 55%;
+  left: 32%;
+}
+@media (max-width: 768px) and (min-width: 576px) {
+  .my-category-card-body-text {
+    left: 40%;
+  }
+}
+@media (max-width: 576px) {
+  .my-category-card-body-text {
+    left: 38%;
+  }
+}
+.my-category-card-body-icon {
+  position: relative;
+  padding: 0 90px;
+}
+@media (max-width: 1200px) and (min-width: 992px) {
+  .my-category-card-body-icon {
+    padding: 0 50px;
+  }
+}
+@media (max-width: 768px) and (min-width: 576px) {
+  .my-category-card-body-icon {
+    padding: 0 250px;
+  }
+}
+@media (max-width: 576px) {
+  .my-category-card-body-icon {
+    padding: 0 150px;
+  }
+}
+@media (max-width: 1200px) and (min-width: 992px) {
+  .my-category-card-body {
+    width: 200px;
+    height: 375px;
   }
 }
