@@ -27,7 +27,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-
+        return view('categories.create');
     }
 
     /**
@@ -38,7 +38,14 @@ class CategoriesController extends Controller
      */
     public function store(CreateCategoryrequest $request)
     {
-
+        $image = $request->file('image')->store('images/categories');
+        Category::create([
+            'name' => $request->name,
+            'image' => $image,
+            'user_id' => auth()->id(),
+        ]);
+        session()->flash('success', 'Category created sucessfully!');
+        return redirect(route('categories.index'));
     }
 
     /**
