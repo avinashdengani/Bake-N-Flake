@@ -99,5 +99,9 @@ class CategoriesController extends Controller
     public function destroy(Category $category)
     {
 
+        $category->deleteImage();
+        $category->delete();
+        session()->flash('success', 'Category deleted sucessfully!');
+        return redirect(route('categories.index'));
     }
 }
