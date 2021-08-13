@@ -10,4 +10,10 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }
+
