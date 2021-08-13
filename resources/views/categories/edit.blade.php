@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Edit Category | Bake N Flake')
-@section('favico', asset('images/favico.ico'))
-@section('logo-img', asset('images/logo/logo.jpg'))
+
 
 @section('sidebar')
     @include('layouts.partials._sidebar')

@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Reset Password | Bake N Flake')
-@section('favico', asset('../../images/favico.ico'))
-@section('logo-img', asset('../../images/logo/logo.jpg'))
+
 
 @section('content')
 <div class="container">

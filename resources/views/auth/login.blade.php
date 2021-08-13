@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Login | Bake N Flake')
-@section('favico', asset('images/favico.ico'))
-@section('logo-img', asset('images/logo/logo.jpg'))
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
