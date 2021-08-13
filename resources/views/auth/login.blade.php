@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-md-4 d-flex flex-column justify-content-center">
                         <div class="col-md-5">
-                            <img src="images/auth/login-user.jpg" alt="" class="ml-5 mb-1" width="150px" height="150px">
+                            <img src="images/auth/login-user.jpg" alt="" class="ml-5 mb-1" width="160px" height="166px">
                         </div>
                         <div>
                             <form method="POST" action="{{ route('login') }}" id="login-form">
