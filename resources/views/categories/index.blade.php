@@ -10,23 +10,23 @@
     @if ($categories->count() > 0)
     <div class="col-md-8">
         <div class="card-group">
-            <div class="my-category-column">
-                <div class="card m-2 my-category-card">
+            <div class="my-admin-column">
+                <div class="card m-2 my-admin-card">
                     <a href="{{ route('categories.create') }}"
                         class="nav-link p-0">
-                        <div class="card-body d-flex justify-content-center flex-column my-category-card-body text-center ">
-                            <p class=" text-center my-category-card-body-icon text-muted"><i class="fa fa-plus-circle fa-3x" ></i></p>
-                            <p class="my-category-card-body-text text-muted">Add Category</p>
+                        <div class="card-body d-flex justify-content-center flex-column my-admin-card-body text-center ">
+                            <p class=" text-center my-admin-card-body-icon text-muted"><i class="fa fa-plus-circle fa-3x" ></i></p>
+                            <p class="my-admin-card-body-text text-muted">Add Category</p>
                         </div>
                     </a>
                 </div>
             </div>
             @foreach ($categories as $category )
-            <div class="my-category-column">
-                <div class="card m-2 my-category-card">
-                    <img class="card-img-top my-category-card-img" src="{{ asset($category->image_path) }}" alt="Card image">
+            <div class="my-admin-column">
+                <div class="card m-2 my-admin-card">
+                    <img class="card-img-top my-admin-card-img my-admin-card-img-active" src="{{ asset($category->image_path) }}" alt="Card image">
                     <div class="card-body">
-                        <h5 class="card-title my-category-card-title"><strong>{{ $category->name }}</strong></h5>
+                        <h5 class="card-title my-admin-card-title"><strong>{{ $category->name }}</strong></h5>
                         <div class="action-buttons">
                             <a
                                 href="{{ route('categories.edit', $category->id) }}"
@@ -42,9 +42,9 @@
                                 title="Delete Category">
                             </button>
                         </div>
-                        <p class="card-text my-category-card-text">Created {{ $category->created_date }}</p>
+                        <p class="card-text my-admin-card-text">Created {{ $category->created_date }}</p>
                         @if ($category->edited_date != null)
-                            <p class="card-text my-category-card-text">
+                            <p class="card-text my-admin-card-text">
                                 <small class="text-muted">
                                     Edited {{ $category->edited_date }}
                                 </small>
@@ -104,18 +104,18 @@
         $("#deleteCategoryForm").attr('action', url);
       }
   </script>
-  <script>
-        function mediaWatcherFunction(mediaWatcher) {
-            if (mediaWatcher.matches) {
-                $(".my-category-column").removeClass("col-md-4");
-                $(".my-category-column").addClass("col-md-6");
-            } else {
-                $(".my-category-column").removeClass("col-md-6");
-                $(".my-category-column").addClass("col-md-4");
-            }
+   <script>
+    function mediaWatcherFunction(mediaWatcher) {
+        if (mediaWatcher.matches) {
+            $(".my-admin-column").removeClass("col-md-4");
+            $(".my-admin-column").addClass("col-md-6");
+        } else {
+            $(".my-admin-column").removeClass("col-md-6");
+            $(".my-admin-column").addClass("col-md-4");
         }
-        var mediaWatcher = window.matchMedia("(max-width: 992px) and (min-width: 768px)");
-        mediaWatcherFunction(mediaWatcher);
-        mediaWatcher.addListener(mediaWatcherFunction);
-  </script>
+    }
+    var mediaWatcher = window.matchMedia("(max-width: 992px) and (min-width: 768px)");
+    mediaWatcherFunction(mediaWatcher);
+    mediaWatcher.addListener(mediaWatcherFunction);
+</script>
 @endsection

@@ -10130,85 +10130,130 @@ body {
   }
 }
 
-.my-category-card {
+.my-admin-card {
   box-shadow: 4px 4px 10px 3px rgba(0, 0, 0, 0.2);
 }
-.my-category-card-img {
+.my-admin-card-img {
+  width: 100%;
+  height: 290px;
+  position: relative;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+.my-admin-card-img img {
   width: 100%;
   height: 290px;
 }
+.my-admin-card-img-active {
+  opacity: 1;
+  visibility: visible;
+  display: block;
+}
+.my-admin-card-img-action-btn {
+  position: absolute;
+  bottom: 10%;
+  left: 30%;
+}
+.my-admin-card-img-carousel-prev, .my-admin-card-img-carousel-next {
+  cursor: pointer;
+  position: absolute;
+  top: 45%;
+  width: auto;
+  margin-top: -22px;
+  color: #FFF;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.my-admin-card-img-carousel-prev:hover, .my-admin-card-img-carousel-next:hover {
+  transition: 0.6s ease;
+  color: gray;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.my-admin-card-img-carousel-next {
+  right: 0%;
+  border-radius: 3px 0 0 3px;
+}
+.my-admin-card-img-carousel-prev {
+  left: 0%;
+}
 @media (max-width: 1200px) and (min-width: 992px) {
-  .my-category-card-img {
+  .my-admin-card-img {
     height: 200px;
   }
 }
-.my-category-card-body {
+.my-admin-card-body {
   width: 250px;
   height: 475px;
 }
-.my-category-card-body-text {
+.my-admin-card-body-text {
   display: none;
   position: absolute;
   top: 55%;
   left: 32%;
 }
 @media (max-width: 768px) and (min-width: 576px) {
-  .my-category-card-body-text {
+  .my-admin-card-body-text {
     left: 40%;
   }
 }
 @media (max-width: 576px) {
-  .my-category-card-body-text {
+  .my-admin-card-body-text {
     left: 38%;
   }
 }
-.my-category-card-body-icon {
+.my-admin-card-body-icon {
   position: relative;
   padding: 0 90px;
 }
 @media (max-width: 1200px) and (min-width: 992px) {
-  .my-category-card-body-icon {
+  .my-admin-card-body-icon {
     padding: 0 50px;
   }
 }
 @media (max-width: 768px) and (min-width: 576px) {
-  .my-category-card-body-icon {
+  .my-admin-card-body-icon {
     padding: 0 250px;
   }
 }
 @media (max-width: 576px) {
-  .my-category-card-body-icon {
+  .my-admin-card-body-icon {
     padding: 0 150px;
   }
 }
 @media (max-width: 1200px) and (min-width: 992px) {
-  .my-category-card-body {
+  .my-admin-card-body {
     width: 200px;
     height: 375px;
   }
 }
-.my-category-card-title {
+.my-admin-card-title {
   font-size: 20px;
 }
 @media (max-width: 1200px) and (min-width: 992px) {
-  .my-category-card-title {
+  .my-admin-card-title {
     font-size: 15px;
   }
 }
-.my-category-card-text {
+.my-admin-card-text {
   font-size: 15px;
 }
 @media (max-width: 1200px) and (min-width: 992px) {
-  .my-category-card-text {
+  .my-admin-card-text {
     font-size: 12px;
   }
 }
-.my-category-card:hover {
+.my-admin-card:hover {
   box-shadow: 5px 5px 11px 5px rgba(0, 0, 0, 0.4);
   transform: scale(1.05);
   transition: 0.3s all ease-in-out;
 }
-.my-category-card:hover .my-category-card-body-text, .my-category-card:hover .my-category-card-body-icon {
+.my-admin-card:hover .my-admin-card-body-text, .my-admin-card:hover .my-admin-card-body-icon {
   display: block;
   transform: scale(1.2);
   transition: 0.3s all ease-in-out;
