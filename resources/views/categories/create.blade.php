@@ -15,7 +15,7 @@
             <div class="card-body">
                 <form action="{{route('categories.store')}}" method="POST" id="create-category-form" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group col-6">
+                    <div class="form-group ">
                         <label for="name">Name</label>
                         <input
                             type="text"
@@ -28,7 +28,7 @@
                             <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group ">
                         <label for="name">Image</label>
                         <div class="custom-file">
                             <input type="file"
@@ -41,8 +41,8 @@
                         <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class=" col-6">
-                        <button type="submit" class="col-6 btn btn-success mt-2">Submit</button>
+                    <div class=" ">
+                        <button type="submit" class=" btn btn-success mt-2">Submit</button>
                     </div>
                   </form>
             </div>
@@ -75,5 +75,17 @@
             var imageName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(imageName);
         });
+    </script>
+    <script>
+        function mediaWatcherFunction(mediaWatcher) {
+            if (mediaWatcher.matches) {
+                $(".form-group").addClass("col-6");
+            } else {
+                $(".form-group").removeClass("col-6");
+            }
+        }
+        var mediaWatcher = window.matchMedia("(min-width: 1200px)");
+        mediaWatcherFunction(mediaWatcher);
+        mediaWatcher.addListener(mediaWatcherFunction);
     </script>
 @endsection
