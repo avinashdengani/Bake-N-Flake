@@ -60,13 +60,41 @@ class ProductsController extends Controller
         return view('products.edit', compact(['product','categories']));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $data = $request->only('category_id', 'user_id', 'name', 'description', 'mrp', 'discount', 'status' );
+
+        $discount = $request->discount;
+        $mrp = $request->mrp;
+        $selling_price = $mrp - ($mrp*$discount)/100;
+        $data['selling_price'] = $selling_price;
+        $product->update($data);
+
+        if($request->has('image')) {
+            foreach($product->images as $image) {
+                $image->delete();
+                $image->deleteImage();
+            }
+            foreach($request->image as $image){
+                $img = $image->store("images/products");
+                Image::create([
+                    'image' => $img,
+                    'product_id' => $product->id
+                ]);
+             }
+        }
+        session()->flash('success', 'Product updated sucessfully!');
+        return redirect(route('products.index'));
     }
 
     public function destroy(Product $product)
     {
-        //
+        foreach($product->images as $image) {
+            $image->delete();
+            $image->deleteImage();
+        }
+        $product->delete();
+        session()->flash('success', 'Product deleted sucessfully!');
+        return redirect(route('products.index'));
     }
 }
