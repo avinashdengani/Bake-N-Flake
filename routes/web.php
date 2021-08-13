@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\ProductsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,4 +23,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('categories', CategoriesController::class);
+Route::resource('categories', CategoriesController::class)->middleware('auth');
+Route::resource('products', ProductsController::class)->middleware('auth');
+Route::resource('products.images', ImagesController::class)->only(['edit', 'update', 'destroy'])->middleware('auth');
