@@ -21,12 +21,32 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         return view('products.create', compact(['categories']));
-
     }
 
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
-        //
+        $discount = $request->discount;
+        $mrp = $request->mrp;
+        $selling_price = $mrp - ($mrp*$discount)/100;
+        $product = Product::create([
+            'category_id' => $request->category_id,
+            'user_id' => auth()->id(),
+            'name' => $request->name,
+            'description' => $request->description,
+            'mrp' => $mrp,
+            'selling_price' => $selling_price,
+            'discount' => $discount,
+            'status' => $request->status,
+        ]);
+        foreach($request->image as $image){
+           $img = $image->store("images/products");
+           Image::create([
+               'image' => $img,
+               'product_id' => $product->id
+           ]);
+        }
+        session()->flash('success', 'Product added sucessfully!');
+        return redirect(route('products.index'));
     }
 
     public function show(Product $product)
