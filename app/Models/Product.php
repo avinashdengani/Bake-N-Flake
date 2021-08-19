@@ -34,7 +34,11 @@ class Product extends Model
         }
         return $this->updated_at->diffForHumans();;
     }
-    
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
     public function images()
     {
         return $this->hasMany(Image::class);

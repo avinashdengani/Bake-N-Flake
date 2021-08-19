@@ -31,4 +31,8 @@ class Category extends Model
     {
         Storage::delete($this->image);
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
