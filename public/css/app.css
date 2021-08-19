@@ -10270,3 +10270,21 @@ body {
 .custom-file-label:hover {
   cursor: pointer;
 }
+
+.not-allowed {
+  cursor: not-allowed;
+}
+.not-allowed.my-admin-card-img-carousel-prev:hover, .not-allowed.my-admin-card-img-carousel-next:hover {
+  color: #FFF;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.my-nav-link {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.my-nav-link:hover {
+  cursor: pointer;
+}

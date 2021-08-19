@@ -254,3 +254,22 @@ body {
         }
     }
 }
+
+.not-allowed {
+    cursor: not-allowed;
+
+    &.my-admin-card-img-carousel{
+
+        &-prev:hover, &-next:hover {
+            color: #FFF;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+.my-nav-link {
+    user-select: none;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
