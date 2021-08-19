@@ -104,4 +104,14 @@ class ProductsController extends Controller
         session()->flash('success', 'Product deleted sucessfully!');
         return redirect(route('products.index'));
     }
+    public function available()
+    {
+        $products = Product::with("images")->productsAvailable()->oldest('updated_at')->paginate(8);
+        return view('products.index', compact(['products']));
+    }
+    public function unavailable()
+    {
+        $products = Product::with("images")->productsUnavailable()->oldest('updated_at')->paginate(8);
+        return view('products.index', compact(['products']));
+    }
 }
