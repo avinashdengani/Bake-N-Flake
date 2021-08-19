@@ -7,24 +7,28 @@ use App\Http\Requests\products\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::with("images")->oldest('updated_at')->paginate(4);
+        $this->authorize('viewAny', Product::class);
+        $products = Product::with("images")->oldest('updated_at')->paginate(8);
         return view('products.index', compact('products'));
     }
 
     public function create()
     {
+        $this->authorize('create', Product::class);
         $categories = Category::all();
         return view('products.create', compact(['categories']));
     }
 
     public function store(CreateProductRequest $request)
     {
+        $this->authorize('create', Product::class);
         $discount = $request->discount;
         $mrp = $request->mrp;
         $selling_price = $mrp - ($mrp*$discount)/100;
@@ -51,17 +55,19 @@ class ProductsController extends Controller
 
     public function show(Product $product)
     {
-        //
+        $this->authorize('view', $product);
     }
 
     public function edit(Product $product)
     {
+        $this->authorize('update', $product);
         $categories = Category::all();
         return view('products.edit', compact(['product','categories']));
     }
 
     public function update(UpdateProductRequest $request, Product $product)
     {
+        $this->authorize('update', $product);
         $data = $request->only('category_id', 'user_id', 'name', 'description', 'mrp', 'discount', 'status' );
 
         $discount = $request->discount;
@@ -89,6 +95,7 @@ class ProductsController extends Controller
 
     public function destroy(Product $product)
     {
+        $this->authorize('delete', $product);
         foreach($product->images as $image) {
             $image->delete();
             $image->deleteImage();
