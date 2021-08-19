@@ -41,23 +41,23 @@
                                 title="Delete Image">
                             </button>
                             <a
-                                class="my-admin-card-img-carousel-prev my-admin-card-img-carousel-prev-{{$loop->parent->iteration}} bi-chevron-left fa-2x"
-                                title="view previous image">
+                                class="my-admin-card-img-carousel-prev my-admin-card-img-carousel-prev-{{$loop->parent->iteration}} bi-chevron-left fa-2x {{ $product->images->count() <=1  ? 'not-allowed' : '' }}"
+                                title="{{ $product->images->count() <=1  ? '' : 'view previous image' }}">
                             </a>
                             <a
-                                class="my-admin-card-img-carousel-next my-admin-card-img-carousel-next-{{$loop->parent->iteration}} bi-chevron-right fa-2x"
-                                title="view next image">
+                                class="my-admin-card-img-carousel-next my-admin-card-img-carousel-next-{{$loop->parent->iteration}} bi-chevron-right fa-2x {{ $product->images->count() <=1  ? 'not-allowed' : '' }}"
+                                title="{{ $product->images->count() <=1  ? '' : 'view next image' }}">
                             </a>
                         </div>
                     @endforeach
                     </div>
 
                     <div class="card-body">
+                        <h5 class="card-title my-admin-card-title"><strong>{{ $product->name }}<i class="{{ $product->status_css }}">({{ $product->get_status }})</i></strong></h5>
                         <h5
                             class="card-title my-admin-card-title">
                             <strong>
                                 @if ($product->discount > 0) <strike>{{ $product->mrp_cost }}</strike> @endif {{ $product->selling_cost }}</strong></h5>
-                        <h5 class="card-title my-admin-card-title"><strong>{{ $product->name }}</strong></h5>
                         <div class="action-buttons">
                             <a
                                 href="{{ route('products.show', $product->id) }}"
