@@ -48,6 +48,15 @@ class ImagesController extends Controller
 
     public function destroy(Product $product, Image $image)
     {
-        //
+        $this->authorize('delete', $image);
+        if($product->images->count() <= 1) {
+            session()->flash('error', 'You can\'t delete this image as this is the only image.');
+            return redirect(route('products.index'));
+        }
+        $image->deleteImage();
+        $image->delete();
+
+        session()->flash('success', 'Image deleted sucessfully!');
+        return redirect(route('products.index'));
     }
 }
