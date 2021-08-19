@@ -13,7 +13,7 @@ class UpdateImageRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+    return auth()->check();
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'image|mimes:jpeg,png,jpg|max:200'
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:200'
         ];
     }
 }
