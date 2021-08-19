@@ -9,35 +9,22 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        $this->authorize('viewAny', Category::class);
         $categories = Category::oldest('updated_at')->paginate(8);
         return view('categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+        $this->authorize('create', Category::class);
         return view('categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CreateCategoryrequest $request)
     {
+        $this->authorize('create', Category::class);
         $image = $request->file('image')->store('images/categories');
         Category::create([
             'name' => $request->name,
@@ -48,37 +35,20 @@ class CategoriesController extends Controller
         return redirect(route('categories.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function show(Category $category)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Category $category)
     {
+        $this->authorize('update', $category);
         return view('categories.edit', compact(['category']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateCategoryrequest $request, Category $category)
     {
+        $this->authorize('update', $category);
         $dataToUpdate = $request->only(['name']);
         if($request->hasFile('image')) {
             $image = $request->image->store('images/categories');
@@ -90,15 +60,14 @@ class CategoriesController extends Controller
         return redirect(route('categories.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Category $category)
     {
-
+        $this->authorize('delete', $category);
+        $productsCount = $category->products->count();
+        if($productsCount > 0) {
+            session()->flash('error', 'You can\'t delete this category as ' .$productsCount . ' product(s) belongs to this category');
+            return redirect(route('categories.index'));
+        }
         $category->deleteImage();
         $category->delete();
         session()->flash('success', 'Category deleted sucessfully!');
