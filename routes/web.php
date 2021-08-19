@@ -24,5 +24,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('categories', CategoriesController::class)->middleware('auth');
+Route::get('products/available', [ProductsController::class, 'available'])->name('products.available')->middleware('auth');
+Route::get('products/unavailable', [ProductsController::class, 'unavailable'])->name('products.unavailable')->middleware('auth');
 Route::resource('products', ProductsController::class)->middleware('auth');
 Route::resource('products.images', ImagesController::class)->only(['edit', 'update', 'destroy'])->middleware('auth');
