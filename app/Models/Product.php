@@ -34,6 +34,30 @@ class Product extends Model
         }
         return $this->updated_at->diffForHumans();;
     }
+    public function getGetStatusAttribute()
+    {
+        if($this->status === self::PRODUCT_AVAILABLE) {
+            return "Available";
+        } else {
+            return "Unavailable";
+        };
+    }
+    public function getStatusCssAttribute()
+    {
+        if($this->status === self::PRODUCT_AVAILABLE) {
+            return "text-success";
+        } else {
+            return "text-danger";
+        };
+    }
+
+    public function scopeProductsAvailable($query)    {
+        return $query->where('status', self::PRODUCT_AVAILABLE);
+    }
+    public function scopeProductsUnavailable($query)
+    {
+        return $query->where('status', self::PRODUCT_UNAVAILABLE);
+    }
 
     public function category()
     {
