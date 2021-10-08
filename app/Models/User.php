@@ -33,4 +33,8 @@ class User extends Authenticatable
     {
         return $this->role === self::USER_ADMIN;
     }
+    public function testimonial()
+    {
+        return $this->hasOne(Testimonial::class);
+    }
 }
