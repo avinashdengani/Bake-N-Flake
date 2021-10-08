@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\TestimonialsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,4 @@ Route::get('products/available', [ProductsController::class, 'available'])->name
 Route::get('products/unavailable', [ProductsController::class, 'unavailable'])->name('products.unavailable')->middleware('auth');
 Route::resource('products', ProductsController::class)->middleware('auth');
 Route::resource('products.images', ImagesController::class)->only(['edit', 'update', 'destroy'])->middleware('auth');
+Route::resource('testimonials', TestimonialsController::class)->middleware('auth');
