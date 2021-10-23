@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->double('mrp');
-            $table->double('selling_price');
+            $table->string('units');
             $table->double('discount')->default(0.0);
             $table->tinyInteger('status');
             $table->timestamps();
