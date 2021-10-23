@@ -22,6 +22,9 @@ Route::resource('categories', CategoriesController::class)->middleware('auth');
 //CITIES
 Route::resource('cities', CitiesController::class)->middleware('auth');
 
+//CATEGORIES.PRODUCTS
+Route::resource('categories.products', CategoryProductController::class)->only('index', 'show');
+
 //PRODUCTS
 Route::get('products/unavailable', [ProductsController::class, 'unavailable'])->name('products.unavailable')->middleware('auth');
 Route::get('products/available', [ProductsController::class, 'available'])->name('products.available')->middleware('auth');
