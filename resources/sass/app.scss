@@ -4,19 +4,70 @@
 // Variables
 @import 'variables';
 
+//Mixins
+@import "mixins";
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//ANIMATE.CSS
+@import url("~animate.css/animate.css");
+
+//OWL CAROUSEL
+@import url("~owl.carousel/dist/assets/owl.carousel.css");
+@import url("~owl.carousel/dist/assets/owl.theme.default.css");
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+#app {
+    min-height: 100%;
+}
+ul, li {
+    list-style: none;
+}
+//Owl Carousel
+.owl {
+    &-prev {
+        display: none !important;
+    }
+
+    &-next {
+        display: none !important;
+    }
+}
+
 ::selection {
     background: #78e4ff;
+    color: #000;
 }
+
+/* SCROLLBAR */
+
+// width
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+// Track
+::-webkit-scrollbar-track {
+    box-shadow: inset 0px 0px 4px 0px #adb5bd;
+    border-radius: 0px;
+}
+
+//Handle
+::-webkit-scrollbar-thumb {
+    background-color: #b3b5b8 !important;
+    border-radius: 10px;
+}
+
 body {
-    background-color: #FFF9F3;
+    background-color: $skin;
     font-family: 'Comic Neue', cursive;
 }
-.my-navbar {
-    box-shadow: 5px 5px 5px 5px  rgba(0, 0, 0, 0.2);
-}
+
 .my-navbar-brand {
     font-family: 'Fredoka One', cursive;
     color: #57453a;
@@ -41,7 +92,8 @@ body {
     }
 }
 .my-card {
-    box-shadow: 5px 15px 15px 10px  rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 40px #333;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
 .my-login-button {
@@ -273,7 +325,139 @@ body {
         cursor: pointer;
     }
 }
-/* INPUT RANGE SLIDER */
+.my-search {
+    display: flex;
+    padding: 10px 0;
+}
+
+.section {
+    margin: 40px 0;
+
+    &-divider {
+        @include smallScreen {
+            flex-direction: column !important;
+            justify-content: center !important;
+        }
+    }
+
+}
+
+.bg-white {
+    background: $white !important;
+}
+
+.bg-skin {
+    background: $skin !important;
+}
+
+.bg-purple {
+    background: $purple;
+}
+
+.text-purple {
+    color: $purple;
+}
+
+.btn-purple {
+    background: $purple !important;
+    color: $white !important;
+
+    &:hover {
+        background: #a277e4 !important;
+        color: $white !important;
+    }
+}
+.my-underline {
+    position: absolute;
+    top: 0;
+    left: 45%;
+    color: $orange;
+    width: 10%;
+    height: 100%;
+    border-radius: 10px;
+
+    &::after {
+        content: "";
+        width: 100%;
+        position: absolute;
+        height: 5px;
+        top: 0;
+        left: 0;
+        background: $purple;
+        color: $black;
+        border-radius: 10px;
+    }
+
+    &-2 {
+        position: relative;
+        top: 0;
+        left: 0;
+        color: $purple;
+        width: 10%;
+        height: 100%;
+        border-radius: 10px;
+
+        &::after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            height: 5px;
+            top: 0;
+            left: 0;
+            background: $purple;
+            color: $black;
+            border-radius: 10px;
+        }
+    }
+
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #2d2f338f;
+    display: flex;
+
+    &-text {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+  }
+  .my-admin-card-img:hover {
+
+    .overlay {
+        opacity: 1;
+    }
+  }
+
+.btn {
+    &-see-more {
+        border: 1px solid rgba(214, 80, 80, 0.822);
+        background: rgba(245, 176, 176, 0.76);
+        color: rgba(214, 80, 80, 0.822);
+
+        &:hover {
+            color: rgba(214, 80, 80, 0.822);
+        }
+    }
+}
+
+// INPUT RANGE SLIDER
+
 .slidecontainer {
     width: 100%;
     border-radius: 20px;
@@ -308,5 +492,60 @@ body {
         border-radius: 50%;
         background: #04aa6d;
         cursor: pointer;
+    }
+}
+
+.carousel-btn {
+    color: $purple;
+    transition: 0.4s all ease-in-out;
+    &-next {
+        color: $purple;
+        transition: 0.4s all ease-in-out;
+
+        &:hover {
+            background: $purple;
+            color: $white;
+        }
+    }
+    &-prev {
+        color: $purple;
+        transition: 0.4s all ease-in-out;
+
+        &:hover {
+            background: $purple;
+            color: $white;
+        }
+    }
+}
+.testimonial {
+    &-description {
+        font-size: 12px;
+    }
+}
+
+.my-card-border {
+    border: none !important;
+    &-top {
+        border-top: 5px solid $black !important;
+    }
+    &-radius {
+        border-radius: 20px !important;
+    }
+}
+
+#back-to-top {
+    position: fixed;
+    z-index: 9999;
+    bottom: 0;
+    right: 0;
+}
+
+.main-img {
+    &-disabled {
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+        }
     }
 }
