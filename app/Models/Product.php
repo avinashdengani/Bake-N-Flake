@@ -50,7 +50,10 @@ class Product extends Model
             return "text-danger";
         };
     }
-
+    public function hasCity(int $city_id):bool
+    {
+        return in_array($city_id, $this->cities->pluck('id')->toArray());
+    }
     public function scopeProductsAvailable($query)    {
         return $query->where('status', self::PRODUCT_AVAILABLE);
     }
@@ -66,6 +69,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+    public function cities()
+    {
+        return $this->belongsToMany(City::class)->withTimestamps();
     }
 }
 
