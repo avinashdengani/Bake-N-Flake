@@ -51,18 +51,22 @@
                         </div>
                     @endforeach
                     </div>
-
                     <div class="card-body">
                         <h5 class="card-title my-admin-card-title"><strong>{{ $product->name }}<i class="{{ $product->status_css }}">({{ $product->get_status }})</i></strong></h5>
                         <h5
-                            class="card-title my-admin-card-title">
+                            class="card-title my-admin-card-title m-0">
                             <strong>
-                                @if ($product->discount > 0) <strike>{{ $product->mrp_cost }}</strike> @endif {{ $product->selling_cost }}</strong></h5>
+                                @if ($product->discount > 0) <strike>{{ $product->mrp_cost }}</strike> @endif {{ $product->selling_cost }}
+                            </strong>
+                        </h5>
+                        @foreach ($product->cities as $city)
+                            <h5 class="d-inline ">{{$city->city_name}}@if (!$loop->last),@endif</h5>
+                        @endforeach
                         <div class="action-buttons">
                             <a
                                 href="{{ route('products.show', $product->id) }}"
                                 class="btn btn-primary btn-sm bi bi-eye"
-                                title="Edit product">
+                                title="View product">
                             </a>
                             <a
                                 href="{{ route('products.edit', $product->id) }}"
@@ -70,7 +74,6 @@
                                 title="Edit product">
                             </a>
                             <button
-                                type="button"
                                 class="btn btn-outline-danger btn-sm bi bi-trash-fill"
                                 onclick="displayModal({{$product->id}})"
                                 data-toggle="modal"
@@ -191,7 +194,7 @@
         let carouselElement = document.getElementsByClassName("carousel");
         carouselElementLength = carouselElement.length;
         for(let i=1; i<=carouselElementLength; i++) {
-                new ManualSlider("carousel-"+i , "my-admin-card-img-active" , "my-admin-card-img-carousel-next-"+i ,"my-admin-card-img-carousel-prev-"+i );
+            new ManualSlider("carousel-"+i , "my-admin-card-img-active" , "my-admin-card-img-carousel-next-"+i ,"my-admin-card-img-carousel-prev-"+i );
         }
     </script>
 @endsection
