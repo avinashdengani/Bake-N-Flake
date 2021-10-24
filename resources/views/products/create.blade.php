@@ -42,7 +42,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="discount">Units (in kg , pieces, etc)</label>
+                        <label for="units">Units (in kg , pieces, etc)</label>
                         <input
                             type="text"
                             class="form-control @error('units') is-invalid @enderror"
@@ -114,8 +114,8 @@
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control" style="width: 100%">
                             <option></option>
-                            <option value="1" >Available</option>
-                            <option value="0" >Unavailable</option>
+                            <option value="1" {{ old('status') ? 'selected' : ''}}>Available</option>
+                            <option value="0" {{ old('status') ? 'selected' : ''}}>Unavailable</option>
                         </select>
                             @error('price')
                             <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>

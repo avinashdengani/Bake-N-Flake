@@ -27,11 +27,13 @@ class CreateProductRequest extends FormRequest
             'name' => 'required',
             'description' => 'required|max:255',
             'mrp' => 'required|numeric',
+            'units' => 'required',
             'discount' => 'required|numeric|max:100',
             'category_id' => 'required|exists:categories,id',
             'status' => 'required',
             'image' => 'required',
-            'image.*' => 'image|mimes:jpeg,png,jpg|max:200'
+            'image.*' => 'image|mimes:jpeg,png,jpg|max:200',
+            'cities' => 'required|exists:cities,id'
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\products\CreateProductRequest;
 use App\Http\Requests\products\UpdateProductRequest;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
@@ -15,7 +16,7 @@ class ProductsController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Product::class);
-        $products = Product::with("images")->oldest('updated_at')->paginate(8);
+        $products = Product::with("images")->latest('updated_at')->search()->paginate(8);
         return view('products.index', compact('products'));
     }
 
@@ -23,7 +24,8 @@ class ProductsController extends Controller
     {
         $this->authorize('create', Product::class);
         $categories = Category::all();
-        return view('products.create', compact(['categories']));
+        $cities = City::all();
+        return view('products.create', compact(['categories', 'cities']));
     }
 
     public function store(CreateProductRequest $request)
@@ -31,14 +33,14 @@ class ProductsController extends Controller
         $this->authorize('create', Product::class);
         $discount = $request->discount;
         $mrp = $request->mrp;
-        $selling_price = $mrp - ($mrp*$discount)/100;
+
         $product = Product::create([
             'category_id' => $request->category_id,
             'user_id' => auth()->id(),
             'name' => $request->name,
             'description' => $request->description,
             'mrp' => $mrp,
-            'selling_price' => $selling_price,
+            'units' => $request->units,
             'discount' => $discount,
             'status' => $request->status,
         ]);
@@ -49,6 +51,7 @@ class ProductsController extends Controller
                'product_id' => $product->id
            ]);
         }
+        $product->cities()->attach($request->cities);
         session()->flash('success', 'Product added sucessfully!');
         return redirect(route('products.index'));
     }
@@ -62,18 +65,15 @@ class ProductsController extends Controller
     {
         $this->authorize('update', $product);
         $categories = Category::all();
-        return view('products.edit', compact(['product','categories']));
+        $cities = City::all();
+        return view('products.edit', compact(['product','categories', 'cities']));
     }
 
     public function update(UpdateProductRequest $request, Product $product)
     {
         $this->authorize('update', $product);
-        $data = $request->only('category_id', 'user_id', 'name', 'description', 'mrp', 'discount', 'status' );
+        $data = $request->only('category_id', 'user_id', 'name', 'units', 'description', 'mrp', 'discount', 'status' );
 
-        $discount = $request->discount;
-        $mrp = $request->mrp;
-        $selling_price = $mrp - ($mrp*$discount)/100;
-        $data['selling_price'] = $selling_price;
         $product->update($data);
 
         if($request->has('image')) {
@@ -89,6 +89,7 @@ class ProductsController extends Controller
                 ]);
              }
         }
+        $product->cities()->sync($request->cities);
         session()->flash('success', 'Product updated sucessfully!');
         return redirect(route('products.index'));
     }

@@ -43,6 +43,19 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="units">Units (in kg, pieces(gm), etc)</label>
+                        <input
+                            type="text"
+                            class="form-control @error('units') is-invalid @enderror"
+                            id="units"
+                            value="{{old('units', $product->units)}}"
+                            placeholder="Enter units"
+                            name="units">
+                            @error('units')
+                            <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="mrp">MRP (in Rs)</label>
                         <input
                             type="number"
