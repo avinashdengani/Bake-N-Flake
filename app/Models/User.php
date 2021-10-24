@@ -18,6 +18,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'mobile_no'
     ];
 
     protected $hidden = [
@@ -29,10 +31,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //HELPERS
     public function isAdmin()
     {
         return $this->role === self::USER_ADMIN;
     }
+
+    //GETTERS
+    public function getImagePathAttribute()
+    {
+        return "https://ui-avatars.com/api/?name={$this->name}&rounded=true&size=120&background=random";
+    }
+
+    //RELATIONSHIPS
     public function testimonial()
     {
         return $this->hasOne(Testimonial::class);
