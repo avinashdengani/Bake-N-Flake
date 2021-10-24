@@ -3,17 +3,6 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css" integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        trix-editor {
-            height: 250px !important;
-            max-height: 250px !important;
-              overflow-y: auto !important;
-        }
-        .trix-button-group--file-tools { display: none !important; }
-    </style>
-
 @endsection
 @section('sidebar')
     @include('layouts.partials._sidebar')
@@ -44,8 +33,11 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="hidden" id="description" name="description" value="{{ old('description', $product->description) }}">
-                        <trix-editor input="description" class="form-control  @error('description') is-invalid @enderror " ></trix-editor>
+                        <textarea
+                            name="description"
+                            id="description"
+                            rows="6"
+                            class="form-control  @error('description') is-invalid @enderror " >{{old('description', $product->description)}}</textarea>
                         @error('description')
                             <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>
                         @enderror
@@ -93,6 +85,26 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="cities">cities</label>
+                        <select name="cities[]" id="cities" class="form-control select2" style="width: 100%" multiple>
+                            <option></option>
+                            @foreach ($cities as $city)
+                                @if((old('cities') && (in_array($city->id, old('cities')))) || $product->hasCity($city->id))
+                                    <option value="{{$city->id}}" selected>
+                                        {{$city->city_name}}
+                                    </option>
+                                @else
+                                    <option value="{{$city->id}}">
+                                        {{$city->city_name}}
+                                    </option>
+                                @endif
+                        @endforeach
+                        </select>
+                        @error('cities')
+                            <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control" style="width: 100%">
                             <option></option>
@@ -129,15 +141,7 @@
 @endsection
 @section('scripts')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js" integrity="sha512-2RLMQRNr+D47nbLnsbEqtEmgKy67OSCpWJjJM394czt99xj3jJJJBQ43K7lJpfYAYtvekeyzqfZTx2mqoDh7vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        window.addEventListener("trix-file-accept", function(event) {
-        event.preventDefault()
-        alert("File attachment not supported!")
-    })
-    </script>
     <script>
         $("#create-product-form").validate({
             rules: {
