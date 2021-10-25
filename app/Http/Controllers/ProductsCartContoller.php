@@ -30,5 +30,47 @@ class ProductsCartContoller extends Controller
         return view('cart.index', compact(['products', 'totalMrp', 'totalDiscount', 'totalAmount', 'deliveryCharge']));
     }
 
+    public function store(Category $category, Product $product, Request $request)
+    {
+        $rules = [
+            'quantity' => 'required|numeric|min:1',
+        ];
+
+        $this->validate($request, $rules);
+
+        auth()->user()->cart()->create([
+            'product_id' => $product->id,
+            'quantity' => $request->quantity
+        ]);
+
+        session()->flash('success', 'Product Added succesfully');
+        return redirect()->back();
+    }
+
+    public function update(Category $category, Product $product, Request $request)
+    {
+
+        $rules = [
+            'quantity' => 'required|numeric|min:1',
+        ];
+
+        $this->validate($request, $rules);
+        $productToUpdate = Cart::where('product_id', $product->id);
+        $productToUpdate->update([
+            'quantity' => $request->quantity
+        ]);
+
+        session()->flash('success', 'Product Updated succesfully');
+        return redirect()->back();
+    }
+
+    public function destroy(Category $category, Product $product)
+    {
+        $cart = auth()->user()->cart()->get();
+        $cart[0]->where('product_id', $product->id)->delete();
+
+        session()->flash('success', 'Product Removed succesfully');
+        return redirect()->back();
+    }
 
 }

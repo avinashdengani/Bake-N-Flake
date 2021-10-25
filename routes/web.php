@@ -18,6 +18,9 @@ Route::get('/', [App\Http\Controllers\LandingPageController::class, 'index'])->n
 
 //CART
 Route::get('cart', [ProductsCartContoller::class, 'index'])->name('cart.index')->middleware('auth');
+Route::post('cart/categories/{category}/products/{product}', [ProductsCartContoller::class, 'store'])->name('cart.store')->middleware('auth');
+Route::put('cart/categories/{category}/products/{product}', [ProductsCartContoller::class, 'update'])->name('cart.update')->middleware('auth');
+Route::delete('cart/categories/{category}/products/{product}', [ProductsCartContoller::class, 'destroy'])->name('cart.delete')->middleware('auth');
 
 //CATEGORIES
 Route::resource('categories', CategoriesController::class)->middleware('auth');
