@@ -16,6 +16,9 @@ Auth::routes();
 //LANDING PAGE
 Route::get('/', [App\Http\Controllers\LandingPageController::class, 'index'])->name('home');
 
+//CART
+Route::get('cart', [ProductsCartContoller::class, 'index'])->name('cart.index')->middleware('auth');
+
 //CATEGORIES
 Route::resource('categories', CategoriesController::class)->middleware('auth');
 
