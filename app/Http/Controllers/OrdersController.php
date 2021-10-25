@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,6 +17,7 @@ class OrdersController extends Controller
         $orders = [];
         $amounts = array(array());
         $quantities = array(array());
+        $users = [];
         $transactions = Transaction::latest('updated_at')->paginate(10);
         foreach($transactions as $transaction) {
             array_push($orders,  $transaction->order_id);
@@ -28,6 +30,7 @@ class OrdersController extends Controller
         foreach($orders as $order) {
             $orderWiseTransaction = Transaction::where('order_id', $order)->get();
             array_push($dates, $orderWiseTransaction[0]->created_date);
+            array_push($users, User::where('id', $orderWiseTransaction[0]->user_id)->first());
             array_push($allOrderWiseTransactions, $orderWiseTransaction);
         }
         $finalOrders = array(array());
@@ -40,7 +43,7 @@ class OrdersController extends Controller
                 $finalOrders[$transaction->order_id][] = $product;
             }
         }
-        return view('orders.index', compact(['finalOrders', 'orders', 'dates', 'amounts', 'quantities']));
+        return view('orders.index', compact(['finalOrders', 'orders', 'dates', 'amounts', 'quantities', 'users']));
     }
     public function yourOrders()
     {

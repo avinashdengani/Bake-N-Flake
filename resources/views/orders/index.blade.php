@@ -21,11 +21,20 @@
                                 <h5 class="">{{$dates[$loop->index]}}</h5>
                             </div>
                         </div>
+                        <div class="d-flex flex-row justify-content-between">
+                            <div class="customer m-2 p-2 border-bottom">
+                                <h4 class="text-purple">Customer Details:</h4>
+                                <h5 class="">Name: {{ $users[$loop->index]->name}}</h5>
+                                <h5 class="">Address: {{ $users[$loop->index]->address}}</h5>
+                                <h5 class="">Mobile No: {{ $users[$loop->index]->mobile_no}}</h5>
+                            </div>
+                        </div>
                         <div class="card-body">
+                            <h4 class="text-purple">Order Details:</h4>
                             @foreach ($finalOrders[$order] as $product)
                                 <div class="{{$loop->last ? '' : 'border-bottom'}} m-2 d-flex flex-row justify-content-between section-divider">
                                     <div class="content">
-                                        <h4 class="">{{$product['product'][0]->name}}({{$product['product'][0]->units}})</h4>
+                                        <h5 class="">{{$product['product'][0]->name}}({{$product['product'][0]->units}})</h5>
                                         <h5 class="">Price: {{$amounts[$order][$loop->index]}}</h5>
                                         <h5 class="">Quantity: {{$quantities[$order][$loop->index]}}</h5>
                                         <h5 class="">Total Amount: {{$quantities[$order][$loop->index] * $amounts[$order][$loop->index]}}</h5>
