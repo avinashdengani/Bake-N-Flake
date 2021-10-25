@@ -16,10 +16,11 @@ Auth::routes();
 //LANDING PAGE
 Route::get('/', [App\Http\Controllers\LandingPageController::class, 'index'])->name('home');
 
+//Your Orders
+Route::get('your-orders', [OrdersController::class, 'yourOrders'])->name('your-order')->middleware('auth');
 //TRANSACTIONS
 Route::get('cart/transactions', [TransactionsController::class, 'index'])->name('transactions.index')->middleware('auth');
 Route::post('cart/transactions', [TransactionsController::class, 'store'])->name('transactions.store')->middleware('auth');
-
 //CART
 Route::get('cart', [ProductsCartContoller::class, 'index'])->name('cart.index')->middleware('auth');
 Route::post('cart/categories/{category}/products/{product}', [ProductsCartContoller::class, 'store'])->name('cart.store')->middleware('auth');
@@ -34,6 +35,9 @@ Route::resource('cities', CitiesController::class)->middleware('auth');
 
 //CATEGORIES.PRODUCTS
 Route::resource('categories.products', CategoryProductController::class)->only('index', 'show');
+
+//ORDERS
+Route::resource('orders', OrdersController::class)->only('index')->middleware('auth');
 
 //PRODUCTS
 Route::get('products/unavailable', [ProductsController::class, 'unavailable'])->name('products.unavailable')->middleware('auth');

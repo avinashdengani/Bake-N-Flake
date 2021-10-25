@@ -55,6 +55,13 @@ class Product extends Model
         };
     }
 
+    public function getProductCartStatusAttribute()
+    {
+
+        return ( Cart::where('user_id' , auth()->id())->where('product_id', $this->id)->count() > 0 );
+    }
+
+
     //HELPER METHODS
     public function hasCity(int $city_id):bool
     {
@@ -89,9 +96,16 @@ class Product extends Model
     {
         return $this->hasMany(Image::class);
     }
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class);
+    }
     public function cities()
     {
         return $this->belongsToMany(City::class)->withTimestamps();
     }
+    public function transactions()
+    {
+        return $this->belongsToMany(Transaction::class);
+    }
 }
-
