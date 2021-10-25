@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
 
         //CITIES
         City::create([
-            'city_name' => 'Bandra',
+            'city_name' => 'Mumbai',
             'pincode' => 	400050
         ]);
 
