@@ -47,6 +47,12 @@ class TransactionsController extends Controller
             $c->delete();
         }
 
+        retry(5, function () use ($user, $transactions) {
+            Mail::to($user)->send(new OrderSuccesfull($user, $transactions));
+        });
+        $user = User::find(1);
+        $user->notify(new OrderGenerated($user, $order_id));
+
         session()->flash('success', 'Order Successfull. Our team will contact you soon');
         return redirect()->back();
     }
