@@ -16,6 +16,10 @@ Auth::routes();
 //LANDING PAGE
 Route::get('/', [App\Http\Controllers\LandingPageController::class, 'index'])->name('home');
 
+//TRANSACTIONS
+Route::get('cart/transactions', [TransactionsController::class, 'index'])->name('transactions.index')->middleware('auth');
+Route::post('cart/transactions', [TransactionsController::class, 'store'])->name('transactions.store')->middleware('auth');
+
 //CART
 Route::get('cart', [ProductsCartContoller::class, 'index'])->name('cart.index')->middleware('auth');
 Route::post('cart/categories/{category}/products/{product}', [ProductsCartContoller::class, 'store'])->name('cart.store')->middleware('auth');
