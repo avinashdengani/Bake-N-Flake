@@ -83,12 +83,13 @@
                                             <div class="my-admin-card-img child-{{ $loop->iteration }} ">
                                                 <img class="card-img-top" src="{{ asset($image->image_path) }}" alt="Card image">
                                                 <div class="overlay d-flex flex-column justify-content-center align-items-center">
-                                                    <h6 class="text-center text-white">{{$product->name}}</h6>
+                                                    <h6 class="text-center text-white">{{$product->name}} ({{$product->units}})</h6>
                                                     <p class="text-center text-white">
                                                         <strong class="text-white">
                                                             @if ($product->discount > 0) <strike>{{ $product->mrp_cost }}</strike> @endif {{ $product->selling_cost }}
                                                         </strong>
                                                     </p>
+                                                    <a href="{{route('categories.products.show', [$category->id, $product->id])}}" class="btn btn-sm btn-primary">View <i class="fa fa-eye"></i></a>
                                                 </div>
                                             </div>
                                         @endforeach

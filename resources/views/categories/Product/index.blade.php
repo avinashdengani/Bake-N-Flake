@@ -111,7 +111,6 @@
                     required: true,
                     digits: true,
                     min: 1,
-                    max: 10
                 }
             },
             errorElement: 'p',

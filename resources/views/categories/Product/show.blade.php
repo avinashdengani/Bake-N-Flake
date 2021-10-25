@@ -33,6 +33,11 @@
                             <strike>{{ $product->mrp_cost }}</strike>
                         </h6>
                     @endif
+                    <h5></h5>
+                    <h5 class="text-purple">Units:
+                            <p class="text-muted font-italic font-weight-bold d-inline">{{$product->units}}
+                            </p>
+                    </h5>
                     <h5 class="text-purple">Avaliable in:
                         @foreach ($product->cities as $city)
                             <p class="text-muted font-italic font-weight-bold d-inline">{{$city->city_name}}({{$city->pincode}})@if (! $loop->last),@endif
@@ -108,8 +113,7 @@
                 quantity: {
                     required: true,
                     digits: true,
-                    min: 1,
-                    max: 10
+                    min: 1
                 }
             },
             errorElement: 'p',
