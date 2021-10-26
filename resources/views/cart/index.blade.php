@@ -69,7 +69,6 @@
                             </div>
                         </div>
                         @include('cart.quantity-edit-modal')
-                        @include('cart.confirm-order')
                         @include('cart.remove-product')
                     @endforeach
                     <div class="card-footer">

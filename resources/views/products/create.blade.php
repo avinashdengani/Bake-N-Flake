@@ -112,7 +112,7 @@
                     </div>
                     <div class="form-group">
                         <label for="status">Status</label>
-                        <select name="status" id="status" class="form-control" style="width: 100%">
+                        <select name="status" id="status" class="form-control select2" style="width: 100%">
                             <option></option>
                             <option value="1" {{ old('status') ? 'selected' : ''}}>Available</option>
                             <option value="0" {{ old('status') ? 'selected' : ''}}>Unavailable</option>
@@ -194,12 +194,6 @@
         $('.select2').select2({
             placeholder: 'Select an option',
             allowClear: true
-        });
-        $("#status").select2({
-            placeholder: 'Select an option',
-            allowClear: true,
-            minimumResultsForSearch: Infinity,
-            width: 'resolve'
         });
     </script>
     <script>
